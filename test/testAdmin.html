@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn1">管理员登录</button>
+  <button id="btn2">修改管理员密码</button>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    btn1.onclick = function(){
+      axios.get('http://127.0.0.1:8090/admin/login/admin/123456').then((result)=>{
+        console.log('响应登录请求成功')
+        console.log(result)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+    btn2.onclick = function(){
+      var data={aname:"admin",oldPwd:'666666',newPwd:"666666"}
+      axios.patch('http://127.0.0.1:8090/admin',data).then((result)=>{
+        console.log('响应修改密码请求成功')
+        console.log(result)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+    
+  </script>
+</body>
+</html>
