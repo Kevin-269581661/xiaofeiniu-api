@@ -15,7 +15,7 @@
   <script>
     btn1.onclick = function(){
       axios.get('http://127.0.0.1:8090/admin/category').then((result)=>{
-        console.log('发送获取菜品请求成功')
+        console.log('响应获取菜品类别请求成功')
         console.log(result)
       }).catch((err)=>{
         console.log(err)
@@ -23,7 +23,7 @@
     }
     btn2.onclick = function(){
       axios.delete('http://127.0.0.1:8090/admin/category/1').then((result)=>{
-        console.log('发送删除类别请求成功')
+        console.log('响应删除类别请求成功')
         console.log(result)
       }).catch((err)=>{
         console.log(err)
@@ -33,7 +33,7 @@
       //向服务器发送JSON类型的数据
       var data = {cname:'恐龙类'};
       axios.post('http://127.0.0.1:8090/admin/category/',data).then((result)=>{
-        console.log('发送增加菜品类别请求成功')
+        console.log('响应增加菜品类别请求成功')
         console.log(result)
       }).catch((err)=>{
         console.log(err)
@@ -43,7 +43,7 @@
       //向服务器发送JSON类型的数据
       var data = {cid:1,cname:'史前类'};
       axios.put('http://127.0.0.1:8090/admin/category/',data).then((result)=>{
-        console.log('发送更改菜品请求成功')
+        console.log('响应更改菜品类别请求成功')
         console.log(result)
       }).catch((err)=>{
         console.log(err)

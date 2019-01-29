@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn1">获取所有的菜品</button><br>
+  <input type="text" name="" id="inputDesc"><br>
+  <input type="file" id="inputFile"><br>
+  <button id="btn2" type="button">异步上传菜品图片</button><br>
+  <button id="btn3">添加新的菜品</button><br>
+  <button id="btn4">菜品</button>
+  <hr>
+  <!-- 同步上传 -->
+  <form action="http://127.0.0.1:8090/admin/dish/image" method="post" enctype="multipart/form-data">
+    <input type="file" name="dishImage"><br>
+    <input type="text" name="descibtion">
+    <input type="submit">
+  </form>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    btn1.onclick = function(){
+      axios.get('http://127.0.0.1:8090/admin/dish').then((res)=>{
+        console.log('响应获取菜品请求成功')
+        console.log(res.data)
+      }).catch((err)=>{
+        console.log(err) 
+      })
+    }
+    //异步上传图片
+    //手工创建一个multipart/form-data请求主体
+    btn2.onclick = function(){
+      var data = new FormData();
+      //向请求主体中追加要提交的数据
+      data.append('description',inputDesc.value);
+      //向请求主体中追加请求的文件
+      console.dir(inputDesc)//打印js对象
+      console.dir(inputFile)
+      data.append('dishImage',inputFile.files[0]);
+      axios.post('http://127.0.0.1:8090/admin/dish/image',data)//data里有二进制文件，需要修改Content-Type请求头(axios自动设置了请求头)
+      .then((res)=>{
+        console.log(res)
+      }).catch((err)=>{
+        console.log(err)
+      })
+      
+    }
+    btn3.onclick = function(){
+      //向服务器发送JSON类型的数据
+      var data = {
+        title:'小烧饼',
+        imgUrl:'123456.jpg',
+        price:35,
+        detail:'小烧饼的详情介绍',
+        categoryId:3
+      };
+      axios.post('http://127.0.0.1:8090/admin/dish',data).then((result)=>{
+        console.log('响应增加菜品请求成功')
+        console.log(result)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+    btn4.onclick = function(){
+      //向服务器发送JSON类型的数据
+      var data = {cid:1,cname:'史前类'};
+      axios.put('http://127.0.0.1:8090/admin/category/',data).then((result)=>{
+        console.log('响应更改菜品请求成功')
+        console.log(result)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+  </script>
+</body>
+</html>

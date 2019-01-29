@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 //导入路由器
 const categoryRouter = require('./routes/admin/category');
 const adminRouter = require('./routes/admin/admin');
+const dishRouter = require('./routes/admin/dish');
 
 
 //创建HTTP应用服务器
@@ -30,3 +31,4 @@ app.use(bodyParser.json());//把json格式的请求主体数据解析出来放�
 //挂载路由器
 app.use('/admin/category',categoryRouter);
 app.use('/admin',adminRouter);
+app.use('/admin/dish',dishRouter);
