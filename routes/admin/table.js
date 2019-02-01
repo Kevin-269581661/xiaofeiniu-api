@@ -6,20 +6,20 @@ const express = require('express');
 const pool = require('../../pool.js');
 var router = express.Router();
 /*
-*API：GET/admin/category
-*含义：客户端获取所有的菜品类别，按编号升序排列
+*API：GET/admin/table
+*含义：客户端获取所有的桌台信息，按编号升序排列
 *返回值形式：
-*[{cid:1,name:'...'},{...}]
+*[{tid:1,tname:'...',type:xxx,status:xxx},{...}]
 */
 router.get('/', (req, res) => {
-  pool.query('SELECT * FROM xfn_category ORDER BY cid', (err, result) => {
+  pool.query('SELECT * FROM xfn_table ORDER BY tid', (err, result) => {
     if (err) throw err;
     res.send(result);
   })
 });
 /**
- * API:DELETE/admin/category/:cid
- * 含义：根据表示菜品编号的路由参数，删除该菜品
+ * API:DELETE/admin/table/:tid
+ * 含义：根据表示桌台编号的路由参数，删除该菜品
  * 返回值：
  * {code:200,msg:'1 category deleted'}
  * {code:400,msg:'0 category deleted'}
