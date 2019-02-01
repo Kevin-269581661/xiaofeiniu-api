@@ -52,7 +52,7 @@ router.post('/',(req,res)=>{
   //SQL语句使用了简写set后面会自动查找json内的属性并替换
   pool.query('INSERT INTO xfn_category SET ?',data,(err,result)=>{
     if(err)throw err;
-    res.send({ code: 200, msg: "1 category added" })
+    res.send({ code: 200, msg: "1 category added",cid:result.insertId })
   })
 });
 /**
